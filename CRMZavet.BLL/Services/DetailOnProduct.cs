@@ -13,7 +13,7 @@ namespace CRMZavet.BLL.Services
 {
     public class DetailOnProduct : IDetailOnProduct
     {
-        CrmContext db = new CrmContext();
+
         private readonly IUnitOfWork _uof;
 
         public DetailOnProduct(IUnitOfWork uof)
@@ -23,18 +23,15 @@ namespace CRMZavet.BLL.Services
 
         public IEnumerable<DetailDTO> GetDetail(int id)
         {
-            List<DetailDTO> list = new List<DetailDTO>();
-            var prod = db.StructureOfTheProducts.Include("Detail").Where(t => t.ProductID == id).ToList();
-
-            foreach (var item in prod)
+            return _uof.StructureOfTheProducts.Entities.Where(t => t.ProductID == id).Select(x => new DetailDTO
             {
-                DetailDTO detailDTO = new DetailDTO();
-                detailDTO.Name = item.Detail.Name;
-                detailDTO.Id = item.DetailID;
-                detailDTO.Quantity = item.Detail.Quantity / item.Quantity;
-                list.Add(detailDTO);
-            }
-            return list;
+                Name = x.Detail.Name,
+                Id = x.DetailID,
+                Quantity = x.Detail.Quantity / x.Quantity
+            });
         }
+
+            
     }
 }
+

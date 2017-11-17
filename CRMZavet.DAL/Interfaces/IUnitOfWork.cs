@@ -21,7 +21,10 @@ namespace CRMZavet.DAL.Interfaces
         IBaseRepository<AppPaste> AppPastes { get; }
         IBaseRepository<Paste> Pastes { get; }
         IBaseRepository<Silkscreen> Silkscreens { get; }
-        
+
+
+
+
         Task Commit();
 
         void Rollback();

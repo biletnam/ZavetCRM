@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CRMZavet.DAL.Entities;
+using System.Data.Entity;
 
 namespace CRMZavet.DAL.Interfaces
 {
@@ -12,5 +13,6 @@ namespace CRMZavet.DAL.Interfaces
         void Create(T item); // создание объекта
         void Update(T item); // обновление объекта
         void Delete(int id);
+        DbSet<T> Entities { get; }
     }
 }

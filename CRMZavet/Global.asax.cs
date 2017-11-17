@@ -1,4 +1,7 @@
-﻿using CRMZavet.DAL.EF;
+﻿using AutoMapper;
+using CRMZavet.App_Start;
+using CRMZavet.BLL.Infrastructure;
+using CRMZavet.DAL.EF;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -20,6 +23,11 @@ namespace CRMZavet
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             UnityConfig.RegisterComponents();
+            Mapper.Initialize(x =>
+            {
+                AutoMapperConfigWeb.Config.Invoke(x);
+                AutmapperConfigBLL.Configure.Invoke(x);
+            });
         }
     }
 }

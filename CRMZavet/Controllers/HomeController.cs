@@ -1,7 +1,9 @@
-﻿using CRMZavet.BLL.DTO;
+﻿using AutoMapper;
+using CRMZavet.BLL.DTO;
 using CRMZavet.BLL.Interfaces;
 using CRMZavet.DAL.Entities;
 using CRMZavet.DAL.Interfaces;
+using CRMZavet.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +16,7 @@ namespace CRMZavet.Controllers
 {
     public class HomeController : Controller
     {
-        IDetailOnProduct _detailOn;
+        private readonly IDetailOnProduct _detailOn;
         public HomeController(IDetailOnProduct detailOn)
         {
             _detailOn = detailOn;
@@ -22,7 +24,8 @@ namespace CRMZavet.Controllers
 
         public ActionResult Index()
         {
-            IEnumerable<DetailDTO> d = _detailOn.GetDetail(1);
+           
+            var d = Mapper.Map<IEnumerable<DetailDTO>, List<DetailVM>>(_detailOn.GetDetail(1));  
             return View(d);
         }
 
